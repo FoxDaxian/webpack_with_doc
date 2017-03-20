@@ -1,0 +1,25 @@
+{
+  "name": "webpack_with_doc",
+  "version": "1.0.0",
+  "description": "从0开始的webpack啃文档生活",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a13821190779/webpack_with_doc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/a13821190779/webpack_with_doc/issues"
+  },
+  "homepage": "https://github.com/a13821190779/webpack_with_doc#readme",
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "webpack": "^2.2.1"
+  }
+}
