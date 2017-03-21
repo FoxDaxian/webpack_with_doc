@@ -1,6 +1,8 @@
-// 这是a.js
-const a = 5;
-console.log(...[1,2,3,4]);
-console.log(a);
-import temp from './b.js';
-console.log(temp);
+import _ from 'lodash';
+console.log(root_url);
+function acel() {
+	let el = document.createElement("div");
+	el.innerHTML = _.join([1, 2, 3], "");
+	return el;
+}
+document.body.appendChild(acel());
