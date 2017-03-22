@@ -13,8 +13,6 @@ const css_extract = new ExtractTextPlugin({
 
 module.exports = function() {
 	return {
-		//决定map文件的模式
-		devtool: "source-map",
 		entry: {
 			main: path.resolve(__dirname, '../src/js/main.js'),
 		},
@@ -52,25 +50,16 @@ module.exports = function() {
 			new webpack.DefinePlugin({
 				root_url: process.env.NODE_ENV === "production" ? JSON.stringify("生产路径") : JSON.stringify("线上路径"),
 			}),
-			//分离第三方插件库，因为第三方插件库总是不变的，所以让浏览器缓存他，提高速度
-			new webpack.optimize.CommonsChunkPlugin({
-				name: 'vendor',
-				minChunks: function (module) {
-					// 该配置假定你引入的 vendor 存在于 node_modules 目录中
-					return module.context && module.context.indexOf('node_modules') !== -1;
-				}
-			}),
-			//相当于给生成的vendor再次包裹一层，每次打包改变的是mainifest，防止vendor的hash改变
-			//详见https://doc.webpack-china.org/guides/code-splitting-libraries/
-			new webpack.optimize.CommonsChunkPlugin({
-				name: 'manifest',
-				chunks: ['vendor']
-			}),
 			//html插件
 			new HtmlWebpackPlugin({
 				filename: 'index.html'
 			}),
 			css_extract
-			]
+			],
+			devServer: {
+				contentBase: "./dist",
+				historyApiFallback: true,
+				inline: true
+			}
 		};
 	};
