@@ -1,3 +1,5 @@
+import "../css/index.css";
+import "../css/index.scss";
 require('./a');
 require.ensure(['./b'], function(){
 	window.onclick = function() {
@@ -6,3 +8,5 @@ require.ensure(['./b'], function(){
 	require('./c');
 	console.log('done!');
 });
+
+console.log(root_url);
