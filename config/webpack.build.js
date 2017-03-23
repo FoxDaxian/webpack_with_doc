@@ -22,14 +22,14 @@ let config = webpackMerge(base_config(), {
 		//决定map文件的模式
 		devtool: "source-map",
 		module:{
-			rules:[{
+			rules:[{//处理css
 				test: /\.css$/,
 				include:[path.resolve(__dirname,"../src/")],
 				use: css_extract.extract({
 					fallback: "style-loader",
 					use: ["css-loader","postcss-loader"]
 				})
-			},{
+			},{//处理scss
 				test: /\.scss$/,
 				include:[path.resolve(__dirname,"../src/")],
 				use: css_extract.extract({
@@ -53,7 +53,7 @@ let config = webpackMerge(base_config(), {
 				name: 'manifest',
 				chunks: ['vendor']
 			}),
-			//压缩文件，并生成map
+			//压缩JS文件，并生成sourceMap
 			new webpack.optimize.UglifyJsPlugin({
 				compress: {
 					warnings: false
@@ -76,17 +76,20 @@ let config = webpackMerge(base_config(), {
 					removeAttributeQuotes: true,
 					minifyCSS:true,
 					minifyJS:true
-				},
+				}
 			}),
+			//压缩css
 			new optimizeCssAssetsWebpackPlugin({
 				assetNameRegExp: /\.css$/g,//匹配要压缩的文件后缀
 				cssProcessor: require('cssnano'),//为什么使用cssnano？https://github.com/iuap-design/blog/issues/159
 				cssProcessorOptions: { discardComments: {removeAll: true } },
 				canPrint: true
 			}),
+			//预处理css
 			new webpack.LoaderOptionsPlugin({//webpack2的postcss的使用方法，需要下载postcss-loader，不用引入的
 				options: {
 					postcss: function () {
+						//autoprefixer 为css添加浏览器前缀，因为是给css加，所以要加载scss--load的后面
 						return [autoprefixer({browsers:['last 2 versions']})];
 					}
 				}

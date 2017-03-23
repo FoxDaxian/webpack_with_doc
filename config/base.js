@@ -25,7 +25,7 @@ module.exports = function() {
 			publicPath:"./",//打包之后index.html文件引用资源的路径
 		},
 		module: { //处理不同类型文件的各种加载器
-			rules: [{
+			rules: [{//处理es6
 				test: /\.js$/,
 				exclude: /(node_modules|bower_components)/,
 				use: {
