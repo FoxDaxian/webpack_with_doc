@@ -12,17 +12,30 @@ if( hash_onoff ){
 }
 
 
+const ExtractTextPlugin = require("extract-text-webpack-plugin");//提取出css生成css文件
+
+//因为从js中分离出css的话，被分离出的js 和 分离出的css的 hash一样，以js为准，所以使用contenthash，[contenthash] 是 extract-text-webpack-plugin提供的另一种hash值，意为：文本内容的hash值，用来区分js文件的hash值
+const css_extract = new ExtractTextPlugin({
+	filename:"css/[name].[contenthash].css"
+});
+const scss_extract = new ExtractTextPlugin({
+	filename:"css/[name].[contenthash].css"
+});
+
+//压缩css
+const optimizeCssAssetsWebpackPlugin = require("optimize-css-assets-webpack-plugin");
+//补css前缀
+var autoprefixer = require('autoprefixer');
 
 
-module.exports = function() {
-	return {
+module.exports = {
 		entry: {
 			main: path.resolve(__dirname, '../src/js/main.js'),
 		},
 		output: {
 			filename: js_filename, //入口文件key值
 			path: path.resolve(__dirname, '../dist'),
-			publicPath:"./",//打包之后index.html文件引用资源的路径
+			publicPath:"./",//打包之后index.html文件引用资源的路径，现在是可以本地预览，去掉 . 的话就得在服务器上预览
 		},
 		module: { //处理不同类型文件的各种加载器
 			rules: [{//处理es6
@@ -34,7 +47,43 @@ module.exports = function() {
 						presets: ['es2015']
 					}
 				}
+			},{//处理css
+				test: /\.css$/,
+				include:[path.resolve(__dirname,"../src/")],
+				use: css_extract.extract({
+					fallback: "style-loader",
+					use: ["css-loader","postcss-loader"]
+				})
+			},{//处理scss
+				test: /\.scss$/,
+				include:[path.resolve(__dirname,"../src/")],
+				use: scss_extract.extract({
+					fallback: "style-loader",
+					use: ["css-loader","postcss-loader","sass-loader"]
+				})
 			}]
-		}
+		},
+		plugins:[
+			//定义可配置的全局变量
+			new webpack.DefinePlugin({
+				root_url: process.env.node_order === "build" ? JSON.stringify("生产路径") : JSON.stringify("线上路径"),
+			}),
+			//压缩css
+			new optimizeCssAssetsWebpackPlugin({
+				assetNameRegExp: /\.css$/g,//匹配要压缩的文件后缀
+				cssProcessor: require('cssnano'),//为什么使用cssnano？https://github.com/iuap-design/blog/issues/159
+				cssProcessorOptions: { discardComments: {removeAll: true } },
+				canPrint: true
+			}),
+			//预处理css
+			new webpack.LoaderOptionsPlugin({//webpack2的postcss的使用方法，需要下载postcss-loader，不用引入的
+				options: {
+					postcss: function () {
+						//autoprefixer 为css添加浏览器前缀，因为是给css加，所以要加载scss--load的后面
+						return [autoprefixer({browsers:['last 2 versions']})];
+					}
+				}
+			}),
+			css_extract,scss_extract
+			]
 		};
-	};

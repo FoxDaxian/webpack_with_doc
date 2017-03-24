@@ -4,14 +4,15 @@
   "description": "从0开始的webpack啃文档生活",
   "main": "index.js",
   "scripts": {
-    "build": "node node_todo/build.js"
+    "build": "node node_todo/build.js",
+    "dev": "node node_todo/dev.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/a13821190779/webpack_with_doc.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "watermelon",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/a13821190779/webpack_with_doc/issues"
@@ -36,6 +37,7 @@
     "style-loader": "^0.15.0",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.2",
+    "webpack-hot-middleware": "^2.17.1",
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
