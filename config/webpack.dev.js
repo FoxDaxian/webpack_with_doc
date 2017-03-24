@@ -1,3 +1,4 @@
+"use strict";//否则let报错
 const path = require('path');
 const webpack = require('webpack');
 //使用merge

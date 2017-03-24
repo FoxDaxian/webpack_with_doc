@@ -1,3 +1,4 @@
+"use strict";//否则let报错
 const path = require('path');
 const webpack = require('webpack');
 
@@ -66,7 +67,7 @@ module.exports = {
 		plugins:[
 			//定义可配置的全局变量
 			new webpack.DefinePlugin({
-				root_url: process.env.node_order === "build" ? JSON.stringify("生产路径") : JSON.stringify("线上路径"),
+				root_url: process.env.node_order === "build" ? JSON.stringify("生产路径") : JSON.stringify("开发路径"),
 			}),
 			//压缩css
 			new optimizeCssAssetsWebpackPlugin({

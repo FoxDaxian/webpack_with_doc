@@ -1,3 +1,4 @@
+"use strict";//否则let报错
 //使用merge
 const webpackMerge = require('webpack-merge');
 //引入通用配置

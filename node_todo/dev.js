@@ -2,6 +2,9 @@ const express = require("express");
 const webpackDevMiddleware = require("webpack-dev-middleware");//用法usage：https://www.npmjs.com/package/webpack-hot-middleware
 const webpack = require("webpack");
 
+//打开浏览器插件
+const opn = require("opn");
+
 //引入webpack的base配置
 const dev_config = require("../config/webpack.dev.js");
 
@@ -13,7 +16,7 @@ process.env.node_order = "dev";
 const app = express();
 const compiler = webpack(dev_config);
 
-//只用webpack-dev-middleware
+//使用webpack-dev-middleware
 app.use(webpackDevMiddleware(compiler,{
 	publicPath:"/",
 	stats:{//详细配置见：https://doc.webpack-china.org/configuration/stats/
@@ -38,7 +41,11 @@ compiler.plugin('compilation', function (compilation) {
 //express  调用 webpack-hot-middleware
 app.use(hotMiddleware);
 
-app.listen("3000",function() {
-	console.log("Listening on port 3000");
+//设置监听端口
+const port = new Date().getFullYear();
+app.listen(port,function() {
+	console.log(`Listening on port ${port}`);
 });
+
+opn(`http://localhost:${port}/`);
 
