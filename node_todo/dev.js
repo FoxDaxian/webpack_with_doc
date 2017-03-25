@@ -41,9 +41,17 @@ compiler.plugin('compilation', function (compilation) {
 //express  调用 webpack-hot-middleware
 app.use(hotMiddleware);
 
+//通过express.static来设置静态资源路径,express服务，会通过该路径查找资源
+//下面这句话的意思为，访问任何资源路径的时候，都要通过express.static处理，所以现在的资源路径默认为 根目录 ：当前目录：__dirname "../"：上级目录  => 根目录
+app.use(express.static(require("path").resolve(__dirname, '../')));
+
 //设置监听端口
 const port = new Date().getFullYear();
-app.listen(port,function() {
+app.listen(port,function( err ) {
+	if( err ){
+		console.log(err);
+		return false;
+	}
 	console.log(`Listening on port ${port}`);
 });
 
