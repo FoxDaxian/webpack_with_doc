@@ -1,4 +1,12 @@
-import "../css/index.css";
 import "../css/index.scss";
+import "../static/reset.css";
 
-console.log(root_url);
+import click from "./a.js";
+
+import arr from "./b.js";
+
+window.onload = function() {
+	let btn = document.querySelector('.btn');
+	btn.onclick = click;
+	arr();
+}
