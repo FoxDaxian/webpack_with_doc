@@ -1,0 +1,77 @@
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+fieldset, lengend, button, input, textarea, /* form elements 表单元素 */
+th, td { /* table elements 表格元素 */
+	margin: 0;
+	padding: 0;
+}
+a{
+	text-decoration:none;
+	color:#000;
+}
+li{
+	list-style: none;
+}
+body,
+button, input, select, textarea { /* for ie */
+	/*font: 12px/1 Tahoma, Helvetica, Arial, "宋体", sans-serif;*/
+	font: 12px/1 Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif; /* 用 ascii 字符表示，使得在任何编码下都无问题 */
+}
+body{
+	overflow-x: hidden;
+	/*overflow-y: scroll;*/
+	background-color: rgb(249, 249, 249);
+}
+*{
+	font-family: "宋体";
+}
+.red{
+	color:rgb(255, 73, 73);
+}
+.green{
+	color:rgb(19, 206, 102);
+}
+.myBtn{
+	user-select:none;
+	-webkit-user-select:none;
+	font-size: 24px;
+	cursor: default;
+	border-radius: 4px;
+	padding: 5px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-transition:  0.1s;
+	-moz-transition:  0.1s;
+	transition:  0.1s;
+	color:#c1c1c1;
+	box-shadow: 
+	1px 1px 5px #c1c1c1,
+	3px 3px 5px #c1c1c1,
+	4px 4px 10px #000;	
+}		
+.myBtn:active{
+	color:#000;
+	text-shadow: 0 0 10px #fff,
+	0 0 20px  #fff,
+	0 0 30px  #fff;
+	box-shadow: 
+	1px 1px 5px #c1c1c1,
+	2px 2px 10px #000;
+}
+
+/*设置跳转到路由的当前导航的样式*/
+.router_active{
+	color:#4395ff;
+}
+.router_active::after{
+	top: -50%!important;
+}
+.router_active::before{
+	bottom: -50%!important;
+}
+.router_active i{
+	-ms-transform:scale(1)!important;
+	-webkit-transform: scale(1)!important;
+	transform: scale(1)!important;
+}
