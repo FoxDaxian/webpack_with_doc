@@ -1,10 +1,20 @@
 .wrap{
+	border: 1px solid red;
 	height: 100vh;
-	text-align:center;
-	p{
+	.btn{
 		position: relative;
 		top: 50%;
-		transform:translateY(-50%);
-
+		left: 50%;
+		transform:translate(-50%);
+		border:none;
+		outline: none;
+		width: 200px;
+		height: 50px;
+		background-color: #1D8CE0;
+		border-radius:14px;
+		color:#fff;
+		&:hover{
+			background-color: #20A0FF;
+		}
 	}
 }
