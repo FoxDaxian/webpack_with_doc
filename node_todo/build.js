@@ -22,7 +22,10 @@ const spinner = ora('packing....');
 spinner.start();
 
 
+//把用到的资源复制到dist的static中
 shell.rm("-rf",path.resolve(__dirname,"../dist"));
+shell.mkdir("-p",path.resolve(__dirname,"../dist"));
+shell.cp("-R",path.resolve(__dirname,"../src/static/"),path.resolve(__dirname,"../dist/static"));
 
 //执行webpack编译
 const compiler = webpack( build_config );
