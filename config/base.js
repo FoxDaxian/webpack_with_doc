@@ -36,7 +36,11 @@ module.exports = {
 	output: {
 			filename: js_filename, //入口文件key值
 			path: path.resolve(__dirname, '../dist'),
-			publicPath:"/",//打包之后index.html文件引用资源的路径，现在是可以本地预览，去掉 . 的话就得在服务器上预览
+			publicPath:"/",//打包之后index.html文件引用资源的路径，现在是可以本地预览，去掉 . 的话就得在服务器上预览,
+			//##
+			//##如果路径为/的话，那么打包之后static文件就得放到根目录下
+			//##所以要根据网站路径来写这个 publicpath
+			//##
 		},
 		module: { //处理不同类型文件的各种加载器
 			rules: [{//处理es6
