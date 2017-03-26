@@ -17,10 +17,10 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");//提取出css�
 
 //因为从js中分离出css的话，被分离出的js 和 分离出的css的 hash一样，以js为准，所以使用contenthash，[contenthash] 是 extract-text-webpack-plugin提供的另一种hash值，意为：文本内容的hash值，用来区分js文件的hash值
 const css_extract = new ExtractTextPlugin({
-	filename:"static/css/[name].[contenthash].css"
+	filename:"static/css/css.[contenthash].css"
 });
 const scss_extract = new ExtractTextPlugin({
-	filename:"static/css/[name].[contenthash].css"
+	filename:"static/css/scss.[contenthash].css"
 });
 
 //压缩css
@@ -36,7 +36,10 @@ module.exports = {
 	output: {
 			filename: js_filename, //入口文件key值
 			path: path.resolve(__dirname, '../dist'),
-			publicPath:"/",//打包之后index.html文件引用资源的路径，现在是可以本地预览，去掉 . 的话就得在服务器上预览,
+			publicPath:process.env.node_order === "build" ? "./" : "/",
+			//   ./直接任何地方都可打开，/之能在服务器上并且static 得放在根目录
+			//区分开发和生产，资源引入目录
+			//打包之后index.html文件引用资源的路径，现在是可以本地预览，去掉 . 的话就得在服务器上预览,
 			//##
 			//##如果路径为/的话，那么打包之后static文件就得放到根目录下
 			//##所以要根据网站路径来写这个 publicpath
@@ -66,7 +69,7 @@ module.exports = {
 					fallback: "style-loader",
 					use: ["css-loader","postcss-loader","sass-loader"]
 				})
-			},{//处理图片
+			},{//处理图片,####超过尺寸会使用file-loader，所以记得下载
 				test:/\.(png|jpe?g|gif|svg)(\?.*)?$/,
 				use:[{
 					loader:"url-loader",
