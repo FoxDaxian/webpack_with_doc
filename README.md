@@ -1,5 +1,11 @@
 # 原生webpack配置(参考vue-cli
 
+        使用方法：  
+        1、[c]npm i  
+        2、npm run dev （开发）  
+        3、npm run build （打包）  
+        
+ 
 * 具备基础：html，css，sass，es6（JS中设置img的src ，请require、import...
 * 开发、生产两种环境，通过now_env获取当前环境
 * npm run bild （生产模式打包
