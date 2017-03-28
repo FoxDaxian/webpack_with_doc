@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 
 //输出文件名是否带hash 生产环境使用hash，开发环境不使用hash
-const hash_onoff = process.env.node_order === "build" ? true : false;
+const hash_onoff = process.env.NODE_ENV === "production" ? true : false;
 let js_filename;
 if( hash_onoff ){
 	js_filename = "static/js/[name].[chunkhash].js";
@@ -36,7 +36,7 @@ module.exports = {
 	output: {
 			filename: js_filename, //入口文件key值
 			path: path.resolve(__dirname, '../dist'),
-			publicPath:process.env.node_order === "build" ? "./" : "/",
+			publicPath:process.env.NODE_ENV === "production" ? "./" : "/",
 			//   ./直接任何地方都可打开，/之能在服务器上并且static 得放在根目录
 			//区分开发和生产，资源引入目录
 			//打包之后index.html文件引用资源的路径，现在是可以本地预览，去掉 . 的话就得在服务器上预览,
@@ -50,10 +50,7 @@ module.exports = {
 				test: /\.js$/,
 				exclude: /(node_modules|bower_components)/,
 				use: {
-					loader: 'babel-loader',
-					options: {
-						presets: ['es2015']
-					}
+					loader: 'babel-loader'
 				}
 			},{//处理css
 				test: /\.css$/,
@@ -96,7 +93,9 @@ module.exports = {
 		plugins:[
 			//定义可配置的全局变量
 			new webpack.DefinePlugin({
-				now_env: process.env.node_order === "build" ? JSON.stringify("生产路径") : JSON.stringify("开发路径"),
+				'process.env':{//得设置这个环境变量，不然报错- - 
+					'NODE_ENV': process.env.NODE_ENV === "production" ? JSON.stringify("production") : JSON.stringify("development")
+				}
 			}),
 			//压缩css
 			new optimizeCssAssetsWebpackPlugin({
