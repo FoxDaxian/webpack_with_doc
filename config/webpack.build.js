@@ -40,6 +40,7 @@ let config = webpackMerge(base_config, {
 				compress: {
 					warnings: false
 				},
+				sourceMap: true//不能少，不然不生成map，得配合devTool
 			}),
 			//html插件
 			new HtmlWebpackPlugin({
