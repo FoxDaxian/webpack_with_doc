@@ -13,7 +13,7 @@ function show_tips() {
 					<li>可以写sass、css，css自动补齐前缀</li>
 					<li>图片问题：js文件里，用require、import等导入，其他文件就直接用就好了</li>
 					<li>提供热刷新</li>
-					<li>提供判断不同环境的全局变量：now_env</li>
+					<li>提供判断不同环境的全局变量：process.env.NODE_ENV</li>
 					<li>具备代码优化，压缩等基本功能</li>
 					<li>如果要填加网站图标，请如下使用：<br />将图标放到src/static中，并在页面link为static/xxx.icon</li>
 				</ul>

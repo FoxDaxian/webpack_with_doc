@@ -6,7 +6,7 @@ const webpack = require("webpack");
 const shell = require('shelljs');
 
 //定义环境变量以区分开发和生产
-process.env.node_order = "build";
+process.env.NODE_ENV = "production";
 
 //这里引入的配置文件都可以使用到这个环境变量，因为webpack会根据引用关系建立关系图标
 const build_config = require("../config/webpack.build.js");

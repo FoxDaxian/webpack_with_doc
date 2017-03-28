@@ -10,7 +10,7 @@ const dev_config = require("../config/webpack.dev.js");
 
 
 //定义环境变量以区分开发和生产
-process.env.node_order = "dev";
+process.env.NODE_ENV = "development";
 
 
 const app = express();
