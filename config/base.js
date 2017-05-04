@@ -109,7 +109,7 @@ module.exports = {
 				options: {
 					postcss: function () {
 						//autoprefixer 为css添加浏览器前缀，因为是给css加，所以要加载scss--load的后面
-						return [autoprefixer({browsers:['last 2 versions']})];
+						return [autoprefixer({ browsers: ['last 10 Chrome versions', 'last 5 Firefox versions', 'Safari >= 6', 'ie > 8'] })];
 					}
 				}
 			}),
