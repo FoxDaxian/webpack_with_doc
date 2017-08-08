@@ -37,7 +37,7 @@ module.exports = {
 			filename: js_filename, //入口文件key值
 			path: path.resolve(__dirname, '../dist'),
 			publicPath:process.env.NODE_ENV === "production" ? "./" : "/",
-			//   ./直接任何地方都可打开，/之能在服务器上并且static 得放在根目录
+			//   ./直接任何地方都可打开，/只能在服务器上并且static 得放在根目录
 			//区分开发和生产，资源引入目录
 			//打包之后index.html文件引用资源的路径，现在是可以本地预览，去掉 . 的话就得在服务器上预览,
 			//##
