@@ -16,7 +16,6 @@ for( let key in base_config.entry ){
 	base_config.entry[key] = [devClient].concat(base_config.entry[key]);
 }
 
-
 const config =  webpackMerge(base_config, {
  	//决定sourcemap文件的模式
  	devtool: "eval-source-map",
