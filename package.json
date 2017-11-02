@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "node node_todo/build.js",
-    "dev": "node node_todo/dev.js"
+    "dev": "node node_todo/dev.js",
+    "dashboard": "node node_todo/dashboard.dev.js"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "style-loader": "^0.15.0",
     "url-loader": "^0.5.8",
     "webpack": "^2.2.1",
+    "webpack-dashboard": "^1.0.0",
     "webpack-dev-server": "^2.4.2",
     "webpack-hot-middleware": "^2.17.1",
     "webpack-merge": "^4.1.0"

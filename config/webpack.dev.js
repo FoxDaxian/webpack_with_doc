@@ -8,6 +8,7 @@ const base_config = require("./base.js");
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');//生成html
 
+
 process.noDeprecation = true; //去除一个现在无关紧要的警告
 
 //把入口文件改为数组，并添加上iddleware/client?noInfo=true&reload=true，否则webpack-hot-middleware不会起作用
@@ -35,7 +36,7 @@ const config =  webpackMerge(base_config, {
  			title: "webpack-native",
  			filename: 'index.html',
  			inject:true,
- 		}),
+ 		})
  		]
  	});
 module.exports = config;

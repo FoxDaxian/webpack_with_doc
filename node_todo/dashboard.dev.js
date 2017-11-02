@@ -9,6 +9,8 @@ const opn = require("opn");
 const dev_config = require("../config/webpack.dev.js");
 
 const Dashboard = require("webpack-dashboard");
+// for webpack-board
+const DashboardPlugin = require('webpack-dashboard/plugin');
 
 
 //定义环境变量以区分开发和生产
@@ -17,14 +19,14 @@ process.env.NODE_ENV = "development";
 
 const app = express();
 const compiler = webpack(dev_config);
+// for webpack-board
+const dashboard = new Dashboard();
+compiler.apply(new DashboardPlugin(dashboard.setData));
 
 //使用webpack-dev-middleware
 app.use(webpackDevMiddleware(compiler,{
 	publicPath:"/",
-	stats:{//详细配置见：https://doc.webpack-china.org/configuration/stats/
-		colors: true,
-		chunks: false,//少显示点东西，看着干净
-	}
+	quiet: true // for webpack-dashboard
 }));
 
 //使用webpack-hot-middleware
